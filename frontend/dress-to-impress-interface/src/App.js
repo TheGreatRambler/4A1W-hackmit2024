@@ -7,7 +7,7 @@ function App() {
 
   // Fetch the data from the Flask API
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/api/judges_responses')
+    fetch('http://127.0.0.1:5001/api/judges_responses')
       .then(response => response.json())
       .then(data => {
         setJudgesResponses(data);
@@ -18,6 +18,7 @@ function App() {
       });
   }, []);
 
+  // while loading == true, this code will run. 
   if (loading) {
     return <div>Loading...</div>;
   }

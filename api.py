@@ -5,6 +5,10 @@ app = Flask(__name__)
 
 # Endpoint to run each judge's script and return their results
 @app.route('/api/judges_responses', methods=['GET'])
+
+# def test_route():
+#     return "Flask server is running", 200
+
 def get_judges_responses():
     responses = []
 
@@ -14,7 +18,7 @@ def get_judges_responses():
         creativity_response = subprocess.check_output(['python', 'creativity-judge.py']).decode('utf-8')
         technical_response = subprocess.check_output(['python', 'technical-fashion-judge.py']).decode('utf-8')
         theme_response = subprocess.check_output(['python', 'accuracy_theme_judge.py']).decode('utf-8')
-
+        
         # Collect responses from all the judges
         responses.append({"judge": "Color Judge", "feedback": color_response})
         responses.append({"judge": "Creativity Judge", "feedback": creativity_response})
@@ -22,11 +26,13 @@ def get_judges_responses():
         responses.append({"judge": "Theme Accuracy Judge", "feedback": theme_response})
 
     except subprocess.CalledProcessError as e:
-        # Handle script execution errors
+        # If the subprocess fails, catch the error and log it
+        print(f"Error executing script: {e}")
+        # Include the error in the response, so you can debug it
         responses.append({"error": f"Error executing judge scripts: {str(e)}"})
 
     # Return as JSON
     return jsonify(responses)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
