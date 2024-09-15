@@ -56,7 +56,14 @@ def evaluate_outfit(image_url, theme):
 
     return feedback_part.strip(), score
 
+<<<<<<< HEAD
 #image_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'caillou.png')
 #base64_url = image_to_base64(image_path)
 #print(get_prompt("Disney Princess"))
 #print(evaluate_outfit(base64_url, "brat"))
+=======
+image_path = os.path.join(os.path.dirname(__file__), '..', 'assets', 'caillou.png')
+base64_url = image_to_base64(image_path)
+#print(get_prompt("Disney Princess"))
+print(evaluate_outfit(base64_url, "brat"))
+>>>>>>> 2a0362f681cf00765c1d640e165ef83903d7c8bc
